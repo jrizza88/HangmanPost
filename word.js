@@ -85,6 +85,7 @@ Word.prototype.charArray = function() {   // did we find the word?
         var currChar = this.letters[i].character;
         // push into allChars
         allChars.push(currChar);
+
     }
     return allChars;
 };
@@ -109,7 +110,10 @@ Word.prototype.displayWord = function() {  // wordRender
         var currLetter = this.letters[i];
         // call display on current letts
         // push to shownLetters
-        shownLetters.push(currLetter.display());
+        shownLetters = shownLetters + this.letters[i].display();
+       // console.log("test " + this.letters[i]);
+        //console.log("inside the wordDislay :" + shownLetters);
+       // shownLetters.push(currLetter.display());
     }
     // return letters array?
     // 

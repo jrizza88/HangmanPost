@@ -4,7 +4,7 @@ var Word = require('./word');
 var prompt = require('prompt');
 var Game = require('./game');
 //var tWord = new Word('apple');
-// tWord.testWord();
+//tWord.testWord();
 //tWord.convertString();
 console.log('preguess');
 //console.log(tWord.displayWord());
@@ -56,47 +56,51 @@ game = {
 
         prompt.get(['guessLetter'], function(error, result) {
           console.log (' The letter you guessed is: ' + result.guessLetter);
-
+          
 
           //this checks if the letter was found and if it is then it sets that specific letter in the word to be found
           var findUserGuessesCount = self.currentWrd.checkLetter(result.guessLetter);
 
+          console.log("Guess " + findUserGuessesCount);
+
           //if the user guessed incorrectly minus the number of guesses they have left
-          if (findUserGuessesCount == 0) {
+          if (findUserGuessesCount === 0) {
             console.log ("incorrect guess!");
-            self.guessesRemaining--;
+            self.guessesRemaining -= 1;
+
           } else {
             console.log("Yasss, correct guess!");
             //check if you win only when you are right
-            if (self.currentWrd.charArray()){
+            if (self.currentWrd.charArray()=== true){
               console.log("You won!");
-              return; 
+              return 1; 
             }
 
-            resetGuessesRemaining();
+             
           }
- 
-          
-
+     
+  
           //console.log statements:
           console.log('Guesses remaining: ', self.guessesRemaining);
         console.log(self.currentWrd.displayWord());
         //console.log(self.currentWrd.convertString());
        // console.log(self.currentWrd.checkLetter());
         console.log(self.currentWrd.charArray());
+        
         //console.log(self.currentWrd.word);
-        console.log('here are the letters you guessed already: ');
+        console.log('here are the letters you guessed already: ', result.guessLetter);
 
         // if statements to check guesses remaining 
         if ((self.guessesRemaining > 0) && (self.currentWrd.found == false)){
           self.keepPromptingUser();
         }
         else if(self.guessesRemaining == 0){
-          console.log('Game over, but nice try! ', self.currentWrd.word);
+          console.log('Game over, but nice try! ');
           console.log('sorry, it\'s all over');
-          console.log('here is the correct word', self.currentWrd.charArray());
+          console.log('The correct city to guess was', self.currentWrd.charArray());
         }else{
           console.log(self.currentWrd.displayWord());
+          console.log(self.keepPromptingUser());
         }
         });
       }
@@ -106,6 +110,9 @@ game = {
 
 // startgame function goes here?
 game.startGame();
+
+// when you type t in new york city the t isnt registering as correct
+// its not appearing in the guessed already array
 
 
 
