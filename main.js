@@ -1,16 +1,16 @@
 // require your modules
-var Letter = require('./letter');
+//var Letter = require('./letter');
 var Word = require('./word');
 var prompt = require('prompt');
 var Game = require('./game');
 //var tWord = new Word('apple');
 //tWord.testWord();
 //tWord.convertString();
-console.log('preguess');
+//console.log('preguess');
 //console.log(tWord.displayWord());
 //tWord.checkLetter('p');
 //tWord.checkLetter('a');
-console.log('postguess');
+//console.log('postguess');
 
 //console.log(tWord.displayWord());
 
@@ -39,6 +39,8 @@ game = {
             // populate current word in the array 
             this.currentWrd.convertString();
 
+           // var joinLetters = this.wordBank.join('');
+
             this.keepPromptingUser();
 
        },
@@ -61,17 +63,17 @@ game = {
           //this checks if the letter was found and if it is then it sets that specific letter in the word to be found
           var findUserGuessesCount = self.currentWrd.checkLetter(result.guessLetter);
 
-          console.log("Guess " + findUserGuessesCount);
-
           //if the user guessed incorrectly minus the number of guesses they have left
-          if (findUserGuessesCount === 0) {
-            console.log ("incorrect guess!");
+          //if (findUserGuessesCount === 0) {
+            if (!findUserGuessesCount === false) {
+            console.log ("INCORRECT guess!");
             self.guessesRemaining -= 1;
 
           } else {
-            console.log("Yasss, correct guess!");
+            console.log("CORRECT GUESS!");
+            //console.log(findUserGuessesCount);
             //check if you win only when you are right
-            if (self.currentWrd.charArray()=== true){
+            if (self.currentWrd.charArray() === true){
               console.log("You won!");
               return 1; 
             }
@@ -96,7 +98,7 @@ game = {
         }
         else if(self.guessesRemaining == 0){
           console.log('Game over, but nice try! ');
-          console.log('sorry, it\'s all over');
+          console.log('Feel free to play again!');
           console.log('The correct city to guess was', self.currentWrd.charArray());
         }else{
           console.log(self.currentWrd.displayWord());
@@ -104,7 +106,6 @@ game = {
         }
         });
       }
-  
 
 };
 

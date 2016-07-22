@@ -7,10 +7,12 @@ var Letter = require('./letter');
 function Word(wrd) {
     // properties gameWord[String]
     // properties letters[Array] to contain char "a", "p",
-    this.gameWord = wrd;
+    this.gameWord = wrd.toLowerCase();
     this.letters = [];
     // a guessedLetters array of strings
     this.guessedLetters = [];
+
+
 }
 
 // create a method convertString()
@@ -19,6 +21,7 @@ function Word(wrd) {
 Word.prototype.convertString = function() {
     // break up this.gameword
     var brokenWordArray = this.gameWord.split('');
+
     // ***********using array.forEach iterator****
     // for each string in the brokenWordArray
     brokenWordArray.forEach(function(brokenElement) {
@@ -34,11 +37,12 @@ Word.prototype.convertString = function() {
 // 
 // method called checkLetter(usrGuess[string])
 // compare usrGuess to the letters in this.letters
-/*Word.prototype.checkLetter = function(usrGuess) { // same is checkifLetterFound
+Word.prototype.checkLetter = function(usrGuess) { // same is checkifLetterFound
     // prevent user from guessing twice
     // if usrGuess in guessedArray then somehow stop function
     // and console log ('u guessed that already');
     if (this.guessedLetters.indexOf(usrGuess) > -1) {
+
         console.log('you guessed that already');
         return;
     }
@@ -48,16 +52,24 @@ Word.prototype.convertString = function() {
         // check if they have the same character
         if (currLet.character === usrGuess) {
             // change ALL OF THE correct letters guessedCorrectly attribute to true
+           // console.log(currLet.character);
+            //console.log(usrGuess);
             currLet.guessedCorrectly = true;
-            console.log('you found the letter', usrGuess);
-        }
+           // console.log('you found the letter', usrGuess);
+        } 
+        //else {
+           // currLet.guessedCorrectly = false;
+           // console.log('incorrect LETTER', usrGuess);
+            //console.log(currLet.character);
+            //console.log(usrGuess);
+        //}
     }
     // change guessedLetters, to include usrGuess
     this.guessedLetters.push(usrGuess);
-}*/
+}
 
 
-Word.prototype.checkLetter = function(usrGuess){
+/*Word.prototype.checkLetter = function(usrGuess){
     var whatToReturn = 0;
     for(var i = 0; i < this.letters.length; i++){
       if(this.letters[i].charac === usrGuess){
@@ -66,7 +78,7 @@ Word.prototype.checkLetter = function(usrGuess){
       }
     } 
     return whatToReturn;
-  }
+  } */
 
 //Word.prototype.charArray = function() {
   //  var str = [];
@@ -105,17 +117,19 @@ Word.prototype.displayWord = function() {  // wordRender
     // create a variable for the displayed letters shownLetter [];
     var shownLetters = [];
     // iterate over array and show each letter
+
     for (var i = 0; i < this.letters.length; i++) {
         // grab the current letter
         var currLetter = this.letters[i];
         // call display on current letts
         // push to shownLetters
-        shownLetters = shownLetters + this.letters[i].display();
+       // shownLetter.push(currLetter.display());
+        //shownLetters = shownLetters + this.letters[i].display();
        // console.log("test " + this.letters[i]);
         //console.log("inside the wordDislay :" + shownLetters);
-       // shownLetters.push(currLetter.display());
-    }
-    // return letters array?
+        shownLetters.push(currLetter.display());
+    };
+    // return letters array
     // 
     return shownLetters;
 };
